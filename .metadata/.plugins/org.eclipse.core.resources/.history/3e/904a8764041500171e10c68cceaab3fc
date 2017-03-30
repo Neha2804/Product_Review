@@ -1,0 +1,72 @@
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.List;
+
+import javax.swing.*;
+
+import edu.stanford.nlp.io.EncodingPrintWriter.err;
+
+
+public class HomePage extends JFrame implements ActionListener{
+	
+    Container c;
+
+    Font font_home = new Font("signboard", Font.BOLD, 30);
+    Font font_home1 = new Font("Viner Hand ITC", Font.ITALIC, 20);
+    Color right = new Color(0,51,102);
+    Color left = new Color(0,51,102);
+    JComboBox<String> jcombo_companies = new JComboBox<String>();
+
+	private JLabel lb_txt;
+    
+    public HomePage() throws IOException
+    {
+	    try
+	    {
+	    	excelRendering er = new excelRendering();
+	    	er.setInputFile("resources/companylist.xls");
+	    	List<String> companylist = er.read(0);
+	    	for(int i=0; i<companylist.size(); i++)
+	    	{
+	    		jcombo_companies.addItem(companylist.get(i));
+	    	}
+	    }
+	    catch(Exception ex)
+	    {
+	    	ex.printStackTrace();
+	    }
+	    c = getContentPane();
+        c.setLayout(new GridLayout());
+
+        jcombo_companies.setBounds(250, 50, 45, 45);
+        JPanel jp = new JPanel();
+        jp.setBackground(left);
+        JPanel jp_btn = new JPanel();
+        lb_txt = new JLabel();
+        lb_txt.setText("select a company for review analysis on.");
+//        lb_txt.setSize(20, 20);
+
+        jp_btn.add(lb_txt);
+        lb_txt.setBounds(200, 125, 800, 30);
+        lb_txt.setFont(font_home);
+        lb_txt.setForeground(left);
+        
+        jcombo_companies.setBounds(250, 50, 45, 45);
+        jp_btn.add(jcombo_companies);
+        
+        c.add(jp);
+        jp.add(jp_btn);
+
+    }
+    
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,31 @@
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+
+public class HomePage extends JFrame implements ActionListener{
+	
+    Container c;
+
+    JButton poptates_Btn, wild_dining_Btn, blue_frog_Btn, candies_Btn;
+    JButton compare_food_Btn, compare_ambience_Btn, compare_cost_Btn, compare_service_Btn;
+    JButton test_Btn;
+
+    JLabel lb1, lb2, lb3, lb_txt, test;
+    Font font_home = new Font("Viner Hand ITC", Font.BOLD, 30);
+    Font font_home1 = new Font("Viner Hand ITC", Font.ITALIC, 20);
+    Color right = new Color(128, 0, 0);
+    Color left = new Color(255, 218, 115);
+    String review;
+    JTextField txt;
+
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -60,7 +60,7 @@ public class HomePage extends JFrame implements ActionListener{
         JPanel jp_btn = new JPanel();
         
         jp.setLayout(new BorderLayout());
-        jp_btn.setLayout(new GridLayout());
+        jp_btn.setLayout(null);
         
         lb_txt = new JLabel();
         lb_txt.setText("select a company:");

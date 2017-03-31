@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -58,47 +60,50 @@ public class HomePage extends JFrame implements ActionListener{
         JPanel jp = new JPanel();
         jp.setBackground(left);
         JPanel jp_btn = new JPanel();
-        
-        jp.setLayout(new BorderLayout());
+        JPanel jp_cb1 = new JPanel();
+        JPanel jp_cb2 = new JPanel();
+        jp.setLayout(new FlowLayout());
         jp_btn.setLayout(null);
         
         lb_txt = new JLabel();
         lb_txt.setText("select a company:");
 
-        jp_btn.add(lb_txt);
-        lb_txt.setBounds(120, 100, 800, 30);
+        jp_cb1.add(lb_txt);
+        lb_txt.setBounds(250, 150, 100, 30);
         lb_txt.setFont(font_home);
         lb_txt.setForeground(left);
         
-        jcombo_companies.setBounds(120, 50, 100, 30);
-        jcombo_companies.setAlignmentY(220);
-        jp_btn.add(jcombo_companies);
+        jp_cb1.setBounds(250, 150, 100, 30);
+        
+        jp_cb1.add(jcombo_companies);
         
         
-        jcombo_products.setBounds(270, 50, 45, 45);
+        //jcombo_products.setBounds(270, 50, 45, 45);
         jp.setBackground(left);
         lb_txt = new JLabel();
         lb_txt.setText("select a product:");
 
-        jp_btn.add(lb_txt);
-        lb_txt.setBounds(250, 175, 800, 30);
+        jp_cb2.add(lb_txt);
+        lb_txt.setBounds(250, 150, 100, 30);
         lb_txt.setFont(font_home);
         lb_txt.setForeground(left);
         
-        jcombo_products.setBounds(250, 150, 145, 45);
-        jp_btn.add(jcombo_products);
+        jp_cb2.setBounds(250, 150, 145, 45);
+        jp_cb2.add(jcombo_products);
         
-        compare_product = new JButton("Compare Product");
-        compare_product.setFont(font_home1);
-        compare_product.setBounds(400, 400, 200, 50);
-        compare_product.setBackground(Color.white);
-        compare_product.setForeground(right);
-        compare_product.addActionListener(this);
-        jp_btn.add(compare_product);
+//        compare_product = new JButton("Compare Product");
+//        compare_product.setFont(font_home1);
+//        compare_product.setBounds(400, 400, 200, 50);
+//        compare_product.setBackground(Color.white);
+//        compare_product.setForeground(right);
+//        compare_product.addActionListener(this);
+//        jp_btn.add(compare_product);
         
         
         c.add(jp);
-        jp.add(jp_btn);
+       // jp.add(jp_btn);
+        jp.add(jp_cb1);
+        jp.add(jp_cb2);
 
     }
     

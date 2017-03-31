@@ -1,6 +1,4 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -12,15 +10,23 @@ import java.util.List;
 
 import javax.swing.*;
 
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 import edu.stanford.nlp.io.EncodingPrintWriter.err;
 
 
 public class HomePage extends JFrame implements ActionListener{
 	
-    Container c;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	Container c;
 
     Font font_home = new Font("signboard", Font.BOLD, 30);
-    Font font_home1 = new Font("Viner Hand ITC", Font.ITALIC, 20);
+    Font font_home1 = new Font("Charter BT", Font.ITALIC, 20);
     Color right = new Color(0,51,102);
     Color left = new Color(0,51,102);
     JComboBox<String> jcombo_companies = new JComboBox<String>();
@@ -28,6 +34,8 @@ public class HomePage extends JFrame implements ActionListener{
 	private JLabel lb_txt;
 
 	private JButton compare_product;
+
+	private JButton review_product;
     
     public HomePage() throws IOException
     {
@@ -53,17 +61,16 @@ public class HomePage extends JFrame implements ActionListener{
 	    {
 	    	ex.printStackTrace();
 	    }
+	    
 	    c = getContentPane();
         c.setLayout(new GridLayout());
 
-        //jcombo_companies.setBounds(250, 50, 45, 45);
         JPanel jp = new JPanel();
         jp.setBackground(left);
         JPanel jp_btn = new JPanel();
         JPanel jp_cb1 = new JPanel();
         JPanel jp_cb2 = new JPanel();
         jp.setLayout(new FlowLayout());
-        jp_btn.setLayout(null);
         
         lb_txt = new JLabel();
         lb_txt.setText("select a company:");
@@ -74,11 +81,8 @@ public class HomePage extends JFrame implements ActionListener{
         lb_txt.setForeground(left);
         
         jp_cb1.setBounds(250, 150, 100, 30);
-        
         jp_cb1.add(jcombo_companies);
         
-        
-        //jcombo_products.setBounds(270, 50, 45, 45);
         jp.setBackground(left);
         lb_txt = new JLabel();
         lb_txt.setText("select a product:");
@@ -91,25 +95,60 @@ public class HomePage extends JFrame implements ActionListener{
         jp_cb2.setBounds(250, 150, 145, 45);
         jp_cb2.add(jcombo_products);
         
-//        compare_product = new JButton("Compare Product");
-//        compare_product.setFont(font_home1);
-//        compare_product.setBounds(400, 400, 200, 50);
-//        compare_product.setBackground(Color.white);
-//        compare_product.setForeground(right);
-//        compare_product.addActionListener(this);
-//        jp_btn.add(compare_product);
+        compare_product = new JButton("Compare Product");
+        compare_product.setFont(font_home1);
+        compare_product.setBounds(250, 150, 145, 45);
+        compare_product.setBackground(Color.white);
+        compare_product.setForeground(right);
+        compare_product.addActionListener(this);
+        jp_btn.add(compare_product);
         
+        JPanel jp_btn1 = new JPanel();
+
+        review_product = new JButton("Review Product");
+        review_product.setFont(font_home1);
+        review_product.setBounds(250, 150, 145, 45);
+        review_product.setBackground(Color.white);
+        review_product.setForeground(right);
+        review_product.addActionListener(this);
+        jp_btn1.add(review_product);
         
-        c.add(jp);
-       // jp.add(jp_btn);
         jp.add(jp_cb1);
         jp.add(jp_cb2);
-
+        //jp.add(jp_btn);
+        jp.add(jp_btn1);
+        jp.add(jp_btn);
+        c.add(jp);
     }
     
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent ae) {
 		// TODO Auto-generated method stub
 		
+		if(ae.getSource().equals(review_product))
+		{
+			ReviewPanel rp = new ReviewPanel();
+			rp.setVisible(true);
+			rp.setSize(600,400);            
+		}
+		if(ae.getSource().equals(compare_product))
+		{
+			String productname = jcombo_products.getSelectedItem().toString();
+			try {
+				Data_Preprocessed dp = new Data_Preprocessed(productname);
+			} catch (RowsExceededException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (BiffException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (WriteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}            
+		}
 	}
 
 }

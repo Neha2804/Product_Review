@@ -1,9 +1,13 @@
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
@@ -27,6 +31,7 @@ public class Data_Preprocessed {
 
 	private String product;
 	List<String> stopwords = new ArrayList<String>();
+	private Component c;
 
 	public Data_Preprocessed(String productname) throws IOException, BiffException, RowsExceededException, WriteException {
 
@@ -65,19 +70,23 @@ public class Data_Preprocessed {
             sw = sw + "I-Pad.xls";
             lem = lem + "I-Pad.xls";
         }
-        else if (productname.contains("Headphones"))
+        else if (productname.contains("Headphone"))
         {
             product = "Headphones";
             path = path + "Headphones.xls";
             sw = sw + "Headphones.xls";
             lem = lem + "Headphones.xls";
         }
-        else if(productname.contains("Laptops"))
+        else if(productname.contains("Laptop"))
         {
             product = "Laptops";
             path = path + "Laptops.xls";
             sw = sw + "Laptops.xls";
             lem = lem + "Laptops.xls";
+        }
+        else
+        {
+        	JOptionPane.showMessageDialog(c, "Something went wrong, please check for the review excel in resources.");
         }
 
         Workbook workbook = Workbook.getWorkbook(new File(path));
@@ -155,17 +164,20 @@ public class Data_Preprocessed {
                 temp = temp + a[p] + " ";
             }
 
-            Label label = new Label(1, i, s);
-            wsheet.addCell(label); //copying stop words filtered
+            for(int cc = 0; cc <5; cc++)
+            {
+            	Label label = new Label(cc, i, s);
+                wsheet.addCell(label); //copying stop words filtered
 
-            Label label1 = new Label(1, i, temp);
-            wsheet1.addCell(label1); //copying lemmatized 
+                Label label1 = new Label(cc, i, temp);
+                wsheet1.addCell(label1); //copying lemmatized 
 
-            Cell cell2 = wsheet.getCell(1, i);
-            // System.out.println(cell2.getContents());
+                Cell cell2 = wsheet.getCell(cc, i);
+                // System.out.println(cell2.getContents());
 
-            Cell cell3 = wsheet1.getCell(1, i);
-            // System.out.println(cell3.getContents());
+                Cell cell3 = wsheet1.getCell(cc, i);
+                // System.out.println(cell3.getContents());
+            }
 
         }
 
@@ -176,6 +188,7 @@ public class Data_Preprocessed {
         w.close();
         w1.close();
 
+        JOptionPane.showMessageDialog(c, "Pre-Processing Done.");
 //        Hypernyms h = new Hypernyms();
 //        
 //        h.setup(hotel, lem, user);

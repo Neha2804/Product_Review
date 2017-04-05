@@ -12,6 +12,7 @@ public class excelRendering {
 
     private String inputFile;
    
+    
     public void setInputFile(String inputFile) 
     {
         this.inputFile = inputFile;
@@ -28,12 +29,7 @@ public class excelRendering {
             w = Workbook.getWorkbook(inputWorkbook);
             // Get the first sheet
 
-
             Sheet sheet = w.getSheet(0);
-            //data = new String[sheet.getColumns()][sheet.getRows()];
-            
-            /*for (int j = 0; j <sheet.getColumns(); j++) 
-            {*/
                 for (int i = 1; i < sheet.getRows(); i++) 
                 {
                     Cell cell = sheet.getCell(columnNumber, i);
@@ -41,15 +37,13 @@ public class excelRendering {
                         data.add(cell.getContents());                 
                     }
                 }
-            //}
              w.close();
-
         } 
         catch (BiffException e) 
         {
             e.printStackTrace();
         }
         
-    return data;
-}
+        return data;
+    }
 }

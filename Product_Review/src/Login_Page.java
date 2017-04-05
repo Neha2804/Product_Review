@@ -53,6 +53,11 @@ import jxl.write.WritableWorkbook;
 
 public class Login_Page extends JFrame implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8090865313987861870L;
+
 	Container c;
 
     JLabel title, user_login, user_reg, pwd_login, pwd_reg, LOGIN, REG, or;

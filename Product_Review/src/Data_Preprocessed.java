@@ -26,12 +26,15 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
+//import edu.stanford.nlp.ie.machinereading.*;
+
 
 public class Data_Preprocessed {
 
 	private String product;
 	List<String> stopwords = new ArrayList<String>();
 	private Component c;
+	
 
 	public Data_Preprocessed(String productname) throws IOException, BiffException, RowsExceededException, WriteException {
 
@@ -72,17 +75,17 @@ public class Data_Preprocessed {
         }
         else if (productname.contains("Headphone"))
         {
-            product = "Headphones";
-            path = path + "Headphones.xls";
-            sw = sw + "Headphones.xls";
-            lem = lem + "Headphones.xls";
+            product = "Headphone";
+            path = path + "Headphone.xls";
+            sw = sw + "Headphone.xls";
+            lem = lem + "Headphone.xls";
         }
         else if(productname.contains("Laptop"))
         {
-            product = "Laptops";
-            path = path + "Laptops.xls";
-            sw = sw + "Laptops.xls";
-            lem = lem + "Laptops.xls";
+            product = "Laptop";
+            path = path + "Laptop.xls";
+            sw = sw + "Laptop.xls";
+            lem = lem + "Laptop.xls";
         }
         else
         {

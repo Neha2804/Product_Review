@@ -6,9 +6,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.*;
+
+import org.jfree.ui.RefineryUtilities;
 
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
@@ -126,7 +129,9 @@ public class HomePage extends JFrame implements ActionListener{
 		
 		if(ae.getSource().equals(review_product))
 		{
-			ReviewPanel rp = new ReviewPanel();
+			String productname = jcombo_products.getSelectedItem().toString();
+			String companyname = jcombo_companies.getSelectedItem().toString();
+			ReviewPanel rp = new ReviewPanel(productname, companyname);
 			rp.setVisible(true);
 			rp.setSize(600,400);            
 		}
@@ -135,6 +140,16 @@ public class HomePage extends JFrame implements ActionListener{
 			String productname = jcombo_products.getSelectedItem().toString();
 			try {
 				Data_Preprocessed dp = new Data_Preprocessed(productname);
+				HashMap<String, Double> resultset = new HashMap<String, Double>();
+				resultset.put("Amazon", 10d);
+				resultset.put("Flipkart", 12d);
+				resultset.put("Ebay", 12d);
+				resultset.put("shopclues", 15d);
+				resultset.put("GadgetBucket", 22d);
+			BarChart_AWT bchart = new BarChart_AWT("Product Compare Chart", "Comparing "+productname, productname, resultset, "user");
+			bchart.pack( );        
+            RefineryUtilities.centerFrameOnScreen( bchart );        
+            bchart.setVisible( true );
 			} catch (RowsExceededException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

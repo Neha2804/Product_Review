@@ -2,6 +2,7 @@
 down vote
 accepted
 	
+Path:  http://stats.stackexchange.com/questions/219655/k-nn-computational-complexity
 
 Assuming k
 is fixed (as both of the linked lectures do), then your algorithmic choices will determine whether your computation takes O(nd+kn) runtime or O(ndk)
@@ -71,3 +72,57 @@ Return all indices no larger than the computed kth
 
 This approach takes advantage of the fact that efficient approaches exist to find the kth
 smallest value in an unsorted array.
+
+
+
+
+Path: http://stats.stackexchange.com/questions/211177/comparison-of-lda-vs-knn-time-complexity
+
+Time complexity depends on the number of data and features.
+
+LDA time complexity is O(Nd2)
+if N>d, otherwise it's O(d3)
+
+(see this question and answer). It's mostly contained in the training phase, as you have to find the within class variance.
+
+k-NN time complexity is O(Nd)
+
+. Actually, training without preprocessing is instantaneous (check this book), testing takes most time as you have to compare each test instance to most (or even the whole) training data.
+
+Said that, without any other optmizations, k-NN should run incrementally faster than LDA as you add more dimensions to your problem.
+
+Also, k-NN time complexity is pretty much insensitive to the number of classes in most implementations. LDA on the other hand has a direct dependence on that.
+
+
+
+
+Path: http://stats.stackexchange.com/questions/142565/computational-complexity-for-linear-discriminant-analysis
+There are two potential bottlenecks:
+
+    As you pointed out, finding the within-class scatter in step 3 takes N(d+d2)
+
+steps, or O(Nd2)
+
+.
+
+Both the matrix multiplication and eigendecomposition in step 5 take approximately O(d3)
+. Depending on the algorithm, matrix multiplication can be a bit faster: there are algorirthms that are ∼O(n2.4)
+
+    and you can also cheat a bit because you don't need to compute every single eigenvector.
+
+The other steps are relatively trivial, so your answer depends on whether N>d
+. If you have more features than examples, it's O(d3), otherwise it's O(Nd2)
+
+This paper by Cai, He, and Han walks through the space/time complexity in more detail. Annoyingly, they use m
+to mean the number of examples, which you called N, while using N to refer to the number of features, which you call d
+
+, so beware.
+
+The paper also shows a related algorithm that is more time and space efficient. 
+
+
+Other Links:
+
+https://nlp.stanford.edu/IR-book/html/htmledition/time-complexity-and-optimality-of-knn-1.html
+
+http://machinelearningmastery.com/a-tour-of-machine-learning-algorithms/  - Do read for differences
